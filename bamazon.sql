@@ -1,20 +1,20 @@
--- Drops the favorite_db if it exists currently --
-DROP DATABASE IF EXISTS bamazon_db;
 
 -- Create the Database bamazon--
 CREATE DATABASE bamazon_db;
 
---Creating a products table in the bamazon_db --
+-- Creating a products table in the bamazon_db --
 USE bamazon_db;
-CREATE TABLE products(
-  item_id INT NOT NULL AUTO_INCREMENT,
+
+CREATE TABLE products (
+  item_id int NOT NULL AUTO_INCREMENT,
   product_name VARCHAR(200) NOT NULL,
   department_name VARCHAR(200) NOT NULL,
   price DECIMAL(10,2) NOT NULL,
-  stock_quantity INT NULL
+  stock_quantity int NULL,
+  PRIMARY KEY (item_id)
 );
 
---Start the item_id value at 1000
+-- Start the item_id value at 1000 --
 ALTER TABLE products
 AUTO_INCREMENT=1000
 
