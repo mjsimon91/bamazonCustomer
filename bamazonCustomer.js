@@ -32,6 +32,8 @@ connection.connect(function(error){
   if (error) throw error;
 });
 
+//Run the application
+whichProduct();
 
 // // Using inquirer to ask them the ID of the product they would like to buy.
 function whichProduct(){
@@ -47,7 +49,6 @@ function whichProduct(){
         console.log("Product Name: " + res[i].product_name + "\nDepartment Name: " + res[i].department_name + "\nPrice: " + productPrice + "\nQuantity: " + storeQuantity );
       }
       howMany();
-      endConnection();
     });
   });
 }
@@ -60,6 +61,9 @@ function howMany(){
       connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?', [quantityRemaining, productSelected], function (error, results, fields){
         console.log('The order has been placed!');
         console.log('Your total cost will be ' + totalPrice);
+
+        connection.end();
+        
       });
     } else {
       console.log('Insufficient quantity!');
@@ -67,12 +71,4 @@ function howMany(){
 
     console.log('Quantity Remianing ' + quantityRemaining);
   });
-}
-
-whichProduct();
-
-
-//End the connection
-function endConnection(){
-    connection.end();
 }
