@@ -11,7 +11,6 @@ var connection = mysql.createConnection({
 });
 
 var quantity;
-var initialQuantity;
 var newQuantity;
 
 connection.connect(function(err) {
@@ -51,7 +50,7 @@ function managersChoice(){
 
       //If the user selects Add new product
       case 'Add new product':
-        //Add new product function
+        addnewProduct();
         break;
     }
       console.log(answer);
@@ -69,8 +68,8 @@ function viewProducts(){
       '\nQuantity: ' + results[i].stock_quantity +
       '\n-----------------------');
     }
+    connection.end();
   })
-  endConnection();
 }
 
 //If a manager selects `View Low Inventory`, then it should list all items with an inventory count lower than five.
@@ -83,11 +82,15 @@ function viewLowInventory(){
       '\nQuantity: ' + results[i].stock_quantity +
       '\n-----------------------');
     }
+    connection.end();
   })
-  endConnection();
 }
 //If a manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+
+
 function addInventory(){
+  var databaseQuantity;
+  var initialQuantity;
   inquirer.prompt({
     type: 'input',
     name: 'item_id',
@@ -100,30 +103,27 @@ function addInventory(){
       message: 'How many of item ' + itemSelected + ' would you like to add?'
     }).then(function(quantitySelected){
       var quantityEntered = quantitySelected.quantity
-      quantity = parseInt(quantityEntered)
+      quantity = parseInt(quantityEntered);
       //Check if the value entered was a number, and if it is, update the database
       if (typeof quantity == 'number' && quantity >= 0) {
 
         //Query the database in order to find the existing value of the item quantity
         connection.query('SELECT stock_quantity FROM products WHERE item_id = ?',[itemSelected], function(error, results){
           for (var i = 0; i < results.length; i++) {
-            var databaseQuantity = results[i].stock_quantity;
-            initialQuantity = parseInt(databaseQuantity)
+            databaseQuantity = results[i].stock_quantity;
+            initialQuantity = parseInt(databaseQuantity);
+            newQuantity = initialQuantity + quantity;
+            //Add this item to the database
+            connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?',[newQuantity,itemSelected], function(error, results){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Item ' + itemSelected + ' has been increased by a quantity of ' + quantity);
+              }
+              connection.end();
+            })
           }
         });
-        newQuantity = initialQuantity + quantity;
-        //Add this item to the database
-        console.log(initialQuantity + ' initialQuantity');
-        console.log('new quantity entered ' + quantity);
-        console.log('newQuantity ' + newQuantity);
-        // connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?',[newQuantity,itemSelected], function(error, results){
-        //   if (error) {
-        //     console.log(error);
-        //   } else {
-        //     console.log('Item ' + itemSelected + ' has been increased by a quantity of ' + quantity);
-        //   }
-        //     endConnection();
-        // })
       } else {
         console.log("Please enter a valid quantity");
       }
@@ -131,11 +131,49 @@ function addInventory(){
   })
 }
 //   * If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
+
+var productName;
+var departmentName;
+var price;
+var stockQuantity;
+
 function addnewProduct(){
+  //Create an array of questions to ask
+  var questions = [{
+    type:"input",
+    name: "product_name",
+    message: "What is the name of the product you would like to add?"
+  },
+  {
+    type:"input",
+    name: "department_name",
+    message: "Whic department does this product belong in?"
+  },
+  {
+    type:"input",
+    name: "price",
+    message: "What is the price of the product?"
+  },
+  {
+    type:"input",
+    name: "stock_quantity",
+    message: "What should be the initial quantity of this product?"
+  }];
 
-}
+  //Ask these questions
+  inquirer.prompt(questions).then(function(answer){
+    var productName = answer.product_name;
+    var departmentName = answer.department_name;
+    var price = answer.price;
+    var stockQuantity = answer.stock_quantity
 
-//End SQL connection
-function endConnection(){
-    connection.end();
+    connection.query('INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES (?,?,?,?)',[productName, departmentName, price, stockQuantity], function(error, results){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Success!');
+      }
+      connection.end();
+    })
+  })
 }
