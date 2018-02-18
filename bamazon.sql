@@ -30,3 +30,20 @@ Values ("Sapiens: A Brief History of Humankind","Books",21.00,100),
 ("San Francisco Photography Cafe Zoetrope 8x10 inch Print","Art",28.00, 20),
 ("ChefSteps Joule Sous Vide", "Home and Kitchen", 199.99, 30),
 ("Amazon Echo Dot","Echo and Alexa", 29.99, 1000)
+
+-- Create a new MySQL table called `departments`. Your table should include the following columns:
+-- * department_id
+-- * department_name
+-- * over_head_costs (A dummy number you set for each department)
+
+CREATE TABLE departments (
+  department_id INT AUTO_INCREMENT NOT NULL,
+  department_name VARCHAR(100) NOT NULL,
+  over_head_costs DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (department_id)
+)
+
+
+-- Modify the products table so that there's a product_sales column
+ALTER TABLE products
+ADD product_sales DECIMAL(10,2)
