@@ -1,5 +1,5 @@
-//Connect to the mysql npm
-var mysql  = require('mysql');
+//Connect to the npms
+var mysql    = require('mysql');
 var inquirer = require('inquirer');
 
 //SQL credentials
@@ -10,7 +10,69 @@ var connection = mysql.createConnection({
   database : 'bamazon_db'
 });
 
-//Connect to the database 
+//Define the Questions
+var questions = [{
+  type: 'input',
+  name: 'item_id',
+  message: 'Which product would you like to buy? Please enter the item_id.'
+}, {
+  type: 'input',
+  name: 'quantity',
+  message: 'How many would you like to order?'
+}];
+
+//Store the values from the queries
+var id;
+var storeQuantity;
+var productPrice;
+var productSelected;
+
+//Connect to the database
 connection.connect(function(error){
-  if (error) throw error
-})
+  if (error) throw error;
+});
+
+
+// // Using inquirer to ask them the ID of the product they would like to buy.
+function whichProduct(){
+  inquirer.prompt(questions[0]).then(function(answer){
+    productSelected = answer.item_id
+    var query = "SELECT * FROM products WHERE ?";
+    connection.query(query, { item_id: answer.item_id }, function(err, res) {
+      for (var i = 0; i < res.length; i++) {
+        id = res[i].item_id;
+        storeQuantity = res[i].stock_quantity
+        productPrice = res[i].price
+        // console.log(productSelected);
+        console.log("Product Name: " + res[i].product_name + "\nDepartment Name: " + res[i].department_name + "\nPrice: " + productPrice + "\nQuantity: " + storeQuantity );
+      }
+      howMany();
+      endConnection();
+    });
+  });
+}
+//   * The second message should ask how many units of the product they would like to buy.
+function howMany(){
+  inquirer.prompt(questions[1]).then(function(answer){
+    var quantityRemaining = storeQuantity - answer.quantity;
+    if (quantityRemaining > -1) {
+      var totalPrice = answer.quantity * productPrice;
+      connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?', [quantityRemaining, productSelected], function (error, results, fields){
+        console.log('The order has been placed!');
+        console.log('Your total cost will be ' + totalPrice);
+      });
+    } else {
+      console.log('Insufficient quantity!');
+    }
+
+    console.log('Quantity Remianing ' + quantityRemaining);
+  });
+}
+
+whichProduct();
+
+
+//End the connection
+function endConnection(){
+    connection.end();
+}
