@@ -33,7 +33,7 @@ function supervisorsChoice(){
         break;
 
       case "Create New Department":
-        //Create a new Department function
+        createDepartment();
         break;
     }
   })
@@ -41,10 +41,6 @@ function supervisorsChoice(){
 
  // When a supervisor selects `View Product Sales by Department`, the app should display a summarized table in their terminal/bash window.
 
-//  | department_id | department_name | over_head_costs | product_sales | total_profit |
-// | ------------- | --------------- | --------------- | ------------- | ------------ |
-// | 01            | Electronics     | 10000           | 20000         | 10000        |
-// | 02            | Clothing        | 60000           | 100000        | 40000        |
  function viewSalesByDepartment(){
    var totalProductSales = 0;
    inquirer.prompt({
@@ -81,6 +77,23 @@ function supervisorsChoice(){
              '\nTotal Profit: ' + totalProfit
          );
          }
+       }
+       connection.end();
+     })
+   })
+ }
+
+ function createDepartment(){
+   inquirer.prompt({
+     type:'input',
+     name: 'addDepartment',
+     message:'What department would you like to add?'
+   }).then(function(answer){
+     connection.query('INSERT INTO departments(department_name) VALUES (?)',[answer.addDepartment], function(error, result){
+       if (error) {
+         console.log(error);
+       } else {
+         console.log(`${answer.addDepartment} was successfully added`);
        }
        connection.end();
      })
