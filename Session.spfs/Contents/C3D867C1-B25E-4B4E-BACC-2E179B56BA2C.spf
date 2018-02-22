@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>bamazon_db</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>1764769190996257925</string>
+			<key>name</key>
+			<string>GW_Bootcamp</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK0HCBUWFxgZHSQoLDA0VSRudWxs0wkK
+			CwwQFFdOUy5rZXlzWk5TLm9iamVjdHNWJGNsYXNzow0OD4ACgAOA
+			BKMREhOABYAGgAiADFR0eXBlVHJvd3NUa2V5c18QJlNlbGVjdGlv
+			bkRldGFpbFR5cGVQcmltYXJ5S2V5ZWREZXRhaWxz0wkKCxobHKCg
+			gAfSHh8gIVokY2xhc3NuYW1lWCRjbGFzc2VzXxATTlNNdXRhYmxl
+			RGljdGlvbmFyeaMgIiNcTlNEaWN0aW9uYXJ5WE5TT2JqZWN00goL
+			JSehJoAJgAvSCykqK1lOUy5zdHJpbmeACldpdGVtX2lk0h4fLS5f
+			EA9OU011dGFibGVTdHJpbmejLS8jWE5TU3RyaW5n0h4fMTJeTlNN
+			dXRhYmxlQXJyYXmjMTMjV05TQXJyYXnSHh8iNaIiI18QD05TS2V5
+			ZWRBcmNoaXZlctE4OVRkYXRhgAEACAARABoAIwAtADIANwBFAEsA
+			UgBaAGUAbABwAHIAdAB2AHoAfAB+AIAAggCHAIwAkQC6AMEAwgDD
+			AMUAygDVAN4A9AD4AQUBDgETARUBFwEZAR4BKAEqATIBNwFJAU0B
+			VgFbAWoBbgF2AXsBfgGQAZMBmAAAAAAAAAIBAAAAAAAAADoAAAAA
+			AAAAAAAAAAAAAAGa
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1187, 475}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>CREATE TABLE departments (
+  department_id INT AUTO_INCREMENT NOT NULL,
+  department_name VARCHAR(100) NOT NULL,
+  over_head_costs DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (department_id)
+)
+
+-- Modify the products table so that there's a product_sales column
+ALTER TABLE products
+ADD product_sales DECIMAL(10,2)
+
+ALTER TABLE departments
+ALTER over_head_costs SET DEFAULT 0
+
+ALTER TABLE products
+ALTER product_sales SET DEFAULT 0</string>
+			<key>table</key>
+			<string>products</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>200</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>ALTER TABLE products
+ALTER product_sales SET DEFAULT 0</string>
+		<string>ALTER TABLE departments
+ALTER over_head_costs SET DEFAULT 0</string>
+		<string>ALTER TABLE products
+ADD product_sales DECIMAL(10,2)</string>
+		<string>CREATE TABLE departments (
+  department_id INT AUTO_INCREMENT NOT NULL,
+  department_name VARCHAR(100) NOT NULL,
+  over_head_costs DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (department_id)
+)</string>
+		<string>CREATE TABLE departments (
+  department_id INT AUTO_INCREMENT NOT NULL,
+  department_name VARCHAR(100) NOT NULL,
+  over_head_costs DECIMAL(10,2) NOT NULL
+)</string>
+		<string>INSERT INTO products (product_name, department_name, price, stock_quantity)
+Values ("Sapiens: A Brief History of Humankind","Books",21.00,100),("Coco","Movies",19.99,100),("Hamilton Original Broadway Cast Recording", "CD",21.96,100),("TCL 43S305", "TV and Video", 279.99, 10),("Bose QC35", "Headphones", 299.99,40),("Poly and Bark Sculpture Coffee Table in Walnut", "Furniture",303.10, 8),("Nokia Steel – Activity &amp; Sleep Watch","Sports and Outdoors", 129.95, 36),("San Francisco Photography Cafe Zoetrope 8x10 inch Print","Art",28.00, 20),("ChefSteps Joule Sous Vide", "Home and Kitchen", 199.99, 30),("Amazon Echo Dot","Echo and Alexa", 29.99, 1000)</string>
+		<string>-- Start the item_id value at 1000 --
+ALTER TABLE products
+AUTO_INCREMENT=1000</string>
+		<string>CREATE TABLE products (
+  item_id int NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity int NULL,
+  PRIMARY KEY (item_id)
+)</string>
+		<string>USE bamazon_db;
+CREATE TABLE products (
+  item_id int NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity int NULL
+  PRIMARY KEY (item_id)
+)</string>
+		<string>-- Creating a products table in the bamazon_db --
+USE bamazon_db;
+CREATE TABLE products (
+  item_id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity INT NULL
+  PRIMARY KEY ('item_id')
+)</string>
+		<string>USE bamazon_db;
+CREATE TABLE products (
+  item_id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity INT NULL
+  PRIMARY KEY ('item_id')
+)</string>
+		<string>-- Creating a products table in the bamazon_db --
+USE bamazon_db;
+CREATE TABLE products (
+  item_id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity INT NULL
+  PRIMARY KEY (item_id)
+)</string>
+		<string>USE bamazon_db;
+CREATE TABLE products(
+  item_id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity INT NULL
+)</string>
+		<string>-- Drops the favorite_db if it exists currently --
+DROP DATABASE IF EXISTS bamazon_db;
+-- Create the Database bamazon--
+CREATE DATABASE bamazon_db</string>
+		<string>-- Drops the favorite_db if it exists currently --
+DROP DATABASE IF EXISTS bamazon_db;
+-- Create the Database bamazon--
+CREATE DATABASE bamazon_db;
+-- Creating a products table in the bamazon_db --
+USE bamazon_db;
+CREATE TABLE products(
+  item_id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity INT NULL
+);
+-- Start the item_id value at 1000 --
+ALTER TABLE products
+AUTO_INCREMENT=1000
+
+-- Inserting the values into the database--
+INSERT INTO products(product_name, department_name, price, stock_quantity)
+Values ("Sapiens: A Brief History of Humankind","Books",21.00,100),
+("Coco","Movies",19.99,100),
+("Hamilton Original Broadway Cast Recording", "CD",21.96,100),
+("TCL 43S305", "TV and Video", 279.99, 10),
+("Bose QC35", "Headphones", 299.99,40),
+("Poly and Bark Sculpture Coffee Table in Walnut", "Furniture",303.10, 8),
+("Nokia Steel – Activity &amp; Sleep Watch","Sports and Outdoors", 129.95, 36),
+("San Francisco Photography Cafe Zoetrope 8x10 inch Print","Art",28.00, 20),
+("ChefSteps Joule Sous Vide", "Home and Kitchen", 199.99, 30),
+("Amazon Echo Dot","Echo and Alexa", 29.99, 1000)</string>
+		<string>-- Drops the favorite_db if it exists currently --
+DROP DATABASE IF EXISTS bamazon_db;
+-- Create the Database bamazon--
+CREATE DATABASE bamazon_db;
+--Creating a products table in the bamazon_db --
+USE bamazon_db;
+CREATE TABLE products(
+  item_id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(200) NOT NULL,
+  department_name VARCHAR(200) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  stock_quantity INT NULL
+);
+--Start the item_id value at 1000
+ALTER TABLE products
+AUTO_INCREMENT=1000
+
+--Inserting the values into the database
+INSERT INTO products(product_name, department_name, price, stock_quantity)
+Values ("Sapiens: A Brief History of Humankind","Books",21.00,100),
+("Coco","Movies",19.99,100),
+("Hamilton Original Broadway Cast Recording", "CD",21.96,100),
+("TCL 43S305", "TV and Video", 279.99, 10),
+("Bose QC35", "Headphones", 299.99,40),
+("Poly and Bark Sculpture Coffee Table in Walnut", "Furniture",303.10, 8),
+("Nokia Steel – Activity &amp; Sleep Watch","Sports and Outdoors", 129.95, 36),
+("San Francisco Photography Cafe Zoetrope 8x10 inch Print","Art",28.00, 20),
+("ChefSteps Joule Sous Vide", "Home and Kitchen", 199.99, 30),
+("Amazon Echo Dot","Echo and Alexa", 29.99, 1000)</string>
+		<string>select * FROM Top5000</string>
+		<string>CREATE DATABASE top_songsDB</string>
+		<string>CREATE DATABASE top_songsDB;
+USE top_songsDB;
+CREATE TABLE Top5000 (
+  id INT NOT NULL AUTO_INCREMENT,
+  position INT,
+  artist VARCHAR(100) NULL,
+  songTitle VARCHAR(100) NULL,
+  year INT NULL,
+  raw_total DECIMAL(10,4) NULL,
+  raw_us DECIMAL(10,4) NULL,
+  raw_uk DECIMAL(10,4) NULL,
+  raw_eur DECIMAL(10,4) NULL,
+  raw_row DECIMAL(10,4) NULL,
+  PRIMARY KEY (id)
+)</string>
+		<string>CREATE DATABASE top_songsDB;
+USE top_songsDB;
+CREATE TABLE Top5000 (
+  ranking INT NOT NULL AUTO_INCREMENT,
+  artist VARCHAR(100) NULL,
+  songTitle VARCHAR(100) NULL,
+  year INT NULL,
+  raw_total DECIMAL(10,4) NULL,
+  raw_us DECIMAL(10,4) NULL,
+  raw_uk DECIMAL(10,4) NULL,
+  raw_eur DECIMAL(10,4) NULL,
+  raw_row DECIMAL(10,4) NULL,
+  PRIMARY KEY (position)
+)</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.7.21</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
