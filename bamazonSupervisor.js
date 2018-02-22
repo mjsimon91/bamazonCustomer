@@ -1,5 +1,7 @@
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+var cTable = require('console.table');
+
 
 // SQL credentials
 var connection = mysql.createConnection({
@@ -48,39 +50,24 @@ function supervisorsChoice(){
      name:"whichDepartment",
      message:"Which department would you like to view?"
    }).then(function(answer){
-     connection.query('SELECT * from products WHERE department_name = ?', [answer.whichDepartment], function(error, response){
+     connection.query('SELECT SUM(p.product_sales) as total_product_sales, d.department_id, d.department_name, d.over_head_costs, d.over_head_costs FROM products as p INNER JOIN departments as d ON d.department_name = p.department_name WHERE d.department_id = ? GROUP BY d.department_id', [answer.whichDepartment], function(error, response){
        if (error) {
          console.log(error);
+         connection.end();
        } else {
          //loop through all of the responses and add them to the totalProductSales
-         for (var i = 0; i < response.length; i++) {
-           totalProductSales += response[i].product_sales
-         }
-         console.log(totalProductSales);
-         console.log('------------');
-         console.log(' ');
+         console.log('');
+         console.table([{
+           'Department ID': response[0].department_id,
+           'Department Name': response[0].department_name,
+           'Over Head Costs': response[0].over_head_costs,
+           'Product Sales': response[0].total_product_sales,
+           'Total Profit': response[0].total_product_sales - response[0].over_head_costs
+        }]);
+         connection.end();
        }
      })
-     //Get all the data from the departments table
-     connection.query('SELECT * FROM departments',function(error, response){
-       if (error) {
-         console.log(error);
-       } else {
-         //loop through each response in order to get the departments
-         for (var i = 0; i < response.length; i++) {
-           totalProfit = totalProductSales - response[i].over_head_costs
-           console.log(
-             'Department ID: ' + response[i].department_id +
-             '\nDepartment Name: ' + response[i].department_name +
-             '\nOverhead Costs: ' + response[i].over_head_costs +
-             '\nProduct Sales: ' + totalProductSales +
-             '\nTotal Profit: ' + totalProfit
-         );
-         }
-       }
-       connection.end();
-     })
-   })
+    })
  }
 
  function createDepartment(){

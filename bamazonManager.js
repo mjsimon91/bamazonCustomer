@@ -63,11 +63,11 @@ function managersChoice(){
 function viewProducts(){
   connection.query('SELECT * FROM products', function(error, results){
     for (var i = 0; i < results.length; i++) {
-      var Product = new Products(results[i].item_id,results[i].product_name, results[i].price,results[i].stock_quantity)
+      var Product = new Products(results[i].item_id,results[i].product_name, results[i].price,results[i].stock_quantity);
       console.table(Product);
     }
     connection.end();
-  })
+  });
 }
 
 //If a manager selects `View Low Inventory`, then it should list all items with an inventory count lower than five.
@@ -81,7 +81,7 @@ function viewLowInventory(){
       '\n-----------------------');
     }
     connection.end();
-  })
+  });
 }
 //If a manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
 
@@ -98,12 +98,12 @@ function addInventory(){
     type: 'input',
     name: 'quantity',
     message: 'How many of this item would you like to add?'
-  }]
+  }];
 
   inquirer.prompt(questions).then(function(answer){
 
-    var itemSelected = answer.item_id
-    var quantityEntered = answer.quantity
+    var itemSelected = answer.item_id;
+    var quantityEntered = answer.quantity;
     quantity = parseInt(quantityEntered);
 
       //Check if the value entered was a number, and if it is, update the database
@@ -123,13 +123,13 @@ function addInventory(){
                 console.log('Item ' + itemSelected + ' has been increased by a quantity of ' + quantity);
               }
               connection.end();
-            })
+            });
           }
         });
       } else {
         console.log("Please enter a valid quantity");
       }
-    })
+    });
 }
 //   * If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
 
@@ -166,7 +166,7 @@ function addnewProduct(){
     var productName = answer.product_name;
     var departmentName = answer.department_name;
     var price = answer.price;
-    var stockQuantity = answer.stock_quantity
+    var stockQuantity = answer.stock_quantity;
 
     connection.query('INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES (?,?,?,?)',[productName, departmentName, price, stockQuantity], function(error, results){
       if (error) {
@@ -175,13 +175,13 @@ function addnewProduct(){
         console.log('Success!');
       }
       connection.end();
-    })
-  })
+    });
+  });
 }
 
 function Products(itemId, productName, price, quantity){
   this.itemId = itemId,
   this.productName = productName,
   this.price = price,
-  this.quantity = quantity
+  this.quantity = quantity;
 };

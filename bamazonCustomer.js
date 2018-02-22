@@ -66,7 +66,6 @@ function howMany(){
     var quantityRemaining = storeQuantity - answer.quantity;
     if (quantityRemaining > -1) {
       var totalPrice = answer.quantity * productPrice;
-      console.log(typeof totalPrice);
       connection.query('UPDATE products SET stock_quantity = ?, product_sales = product_sales + ? WHERE item_id = ?', [quantityRemaining, totalPrice, productSelected], function (error, results, fields){
         if (error) {
           console.log(error);
