@@ -1,6 +1,7 @@
 //Connect to the npms
 var mysql    = require('mysql');
 var inquirer = require('inquirer');
+var cTable = require('console.table');
 
 //SQL credentials
 var connection = mysql.createConnection({
@@ -38,15 +39,22 @@ whichProduct();
 // // Using inquirer to ask them the ID of the product they would like to buy.
 function whichProduct(){
   inquirer.prompt(questions[0]).then(function(answer){
-    productSelected = answer.item_id
+    productSelected = answer.item_id;
     var query = "SELECT * FROM products WHERE ?";
     connection.query(query, { item_id: answer.item_id }, function(err, res) {
       for (var i = 0; i < res.length; i++) {
         id = res[i].item_id;
-        storeQuantity = res[i].stock_quantity
-        productPrice = res[i].price
+        storeQuantity = res[i].stock_quantity;
+        productPrice = res[i].price;
         // console.log(productSelected);
-        console.log("Product Name: " + res[i].product_name + "\nDepartment Name: " + res[i].department_name + "\nPrice: " + productPrice + "\nQuantity: " + storeQuantity );
+        console.log("");
+        console.table([{
+          'Product Name': res[i].product_name,
+          'Department Name': res[i].department_name,
+          'Price': productPrice,
+          'Quantity': storeQuantity
+        }
+      ]);
       }
       howMany();
     });
@@ -71,8 +79,7 @@ function howMany(){
       });
     } else {
       console.log('Insufficient quantity!');
+      connection.end();
     }
-
-    console.log('Quantity Remianing ' + quantityRemaining);
   });
 }
