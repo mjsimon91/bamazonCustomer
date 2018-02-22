@@ -1,6 +1,7 @@
 //Connect to the npms
 var mysql    = require('mysql');
 var inquirer = require('inquirer');
+var cTable = require('console.table');
 
 //SQL credentials
 var connection = mysql.createConnection({
@@ -62,11 +63,8 @@ function managersChoice(){
 function viewProducts(){
   connection.query('SELECT * FROM products', function(error, results){
     for (var i = 0; i < results.length; i++) {
-      console.log('Item ID: ' + results[i].item_id +
-      '\nProduct Name: ' + results[i].product_name +
-      '\nPrice: ' + results[i].price +
-      '\nQuantity: ' + results[i].stock_quantity +
-      '\n-----------------------');
+      var Product = new Products(results[i].item_id,results[i].product_name, results[i].price,results[i].stock_quantity)
+      console.table(Product);
     }
     connection.end();
   })
@@ -91,19 +89,23 @@ function viewLowInventory(){
 function addInventory(){
   var databaseQuantity;
   var initialQuantity;
-  inquirer.prompt({
+  var questions = [{
     type: 'input',
     name: 'item_id',
     message: 'Which product would you like to add more of? Please enter the item_id.'
-  }).then(function(answer){
+  },
+  {
+    type: 'input',
+    name: 'quantity',
+    message: 'How many of this item would you like to add?'
+  }]
+
+  inquirer.prompt(questions).then(function(answer){
+
     var itemSelected = answer.item_id
-    inquirer.prompt({
-      type: 'input',
-      name: 'quantity',
-      message: 'How many of item ' + itemSelected + ' would you like to add?'
-    }).then(function(quantitySelected){
-      var quantityEntered = quantitySelected.quantity
-      quantity = parseInt(quantityEntered);
+    var quantityEntered = answer.quantity
+    quantity = parseInt(quantityEntered);
+
       //Check if the value entered was a number, and if it is, update the database
       if (typeof quantity == 'number' && quantity >= 0) {
 
@@ -128,7 +130,6 @@ function addInventory(){
         console.log("Please enter a valid quantity");
       }
     })
-  })
 }
 //   * If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
 
@@ -177,3 +178,10 @@ function addnewProduct(){
     })
   })
 }
+
+function Products(itemId, productName, price, quantity){
+  this.itemId = itemId,
+  this.productName = productName,
+  this.price = price,
+  this.quantity = quantity
+};

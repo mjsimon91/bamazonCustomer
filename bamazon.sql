@@ -46,4 +46,4 @@ CREATE TABLE departments (
 
 -- Modify the products table so that there's a product_sales column
 ALTER TABLE products
-ADD product_sales DECIMAL(10,2)
+ADD product_sales DECIMAL(10,2) DEFAULT 0
