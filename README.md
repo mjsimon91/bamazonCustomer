@@ -1,4 +1,3 @@
-# bamazonCustomer
 
 This application allows various customers a a store to interact with a SQL database and manage the inventory of products. A customer will be able to view all of the items the store offers, a manager will be able to view high level information about their store and add inventory, while a supervisor will be able to view some high level information about their store.
 
