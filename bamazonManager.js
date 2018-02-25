@@ -62,9 +62,11 @@ function managersChoice(){
 //If a manager selects `View Products for Sale`, the app should list every available item: the item IDs, names, prices, and quantities.
 function viewProducts(){
   connection.query('SELECT * FROM products', function(error, results){
+    var productArray = [];
     for (var i = 0; i < results.length; i++) {
-      var Product = new Products(results[i].item_id,results[i].product_name, results[i].price,results[i].stock_quantity);
-      console.table(Product);
+      var Product = new Products(results[i].item_id, results[i].product_name, results[i].price,results[i].stock_quantity);
+      productArray.push(Product)
+      console.table(productArray);
     }
     connection.end();
   });
